@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جدول المباريات حسب الأيام</title>
+<style>
+  body { font-family: Tahoma, sans-serif; background: #f0f0f0; margin:0; padding:0; }
+  h1 { text-align: center; margin-top: 20px; }
+
+  /* Sticky search & buttons */
+  #search-container {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding: 10px;
+    border-bottom: 2px solid #333;
+    z-index: 1000;
+  }
+  #search { padding: 5px; width: 200px; }
+  .team-list { margin-top: 10px; text-align: center; }
+  .team-list button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: #3498db;
+    color: #fff;
+    transition: 0.3s;
+  }
+  .team-list button:hover { background: #2980b9; }
+
+  /* Day section */
+  .day-section {
+    margin: 20px auto;
+    max-width: 700px;
+  }
+  .day-section h2 {
+    background: #2c3e50;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  /* Match cards */
+  .match-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 15px 0;
+    padding: 15px;
+    transition: transform 0.2s;
+  }
+  .match-card:hover { transform: scale(1.02); }
+
+  .match-info { display: flex; justify-content: space-between; align-items: center; }
+  .team { font-weight: bold; font-size: 1.1em; }
+  .day-time { color: #555; font-size: 0.95em; }
+
+  /* Team colors */
+  .team1 { color: #e74c3c; }  /* الأحمر */
+  .team2 { color: #27ae60; }  /* الأخضر */
+  .team3 { color: #f39c12; }  /* البرتقالي */
+  .team4 { color: #8e44ad; }  /* البنفسجي */
+  .team5 { color: #3498db; }  /* الأزرق */
+  .team6 { color: #16a085; }  /* أخضر داكن */
+</style>
+</head>
+<body>
+
+<h1>جدول المباريات حسب الأيام</h1>
+
+
+<div id="search-container">
+  <input type="text" id="search" placeholder="ابحث عن الفريق...">
+  <div class="team-list">
+    <button onclick="scrollToMatch('match1')">نبيل الفتحلي</button>
+    <button onclick="scrollToMatch('match2')">الرحمة</button>
+    <button onclick="scrollToMatch('match3')">شفافلة</button>
+    <button onclick="scrollToMatch('match4')">قرشين</button>
+    <button onclick="scrollToMatch('match5')">قصر سعد</button>
+    <button onclick="scrollToMatch('match6')">العيايدة</button>
+    <button onclick="scrollToMatch('match7')">السودان</button>
+    <button onclick="scrollToMatch('match8')">لبنة</button>
+    <button onclick="scrollToMatch('match9')">البريقي</button>
+    <button onclick="scrollToMatch('match10')">عين غراب</button>
+    <button onclick="scrollToMatch('match11')">تافلون حمة</button>
+    <button onclick="scrollToMatch('match12')">ديار الحجاج</button>
+  </div>
+</div>
+<!-- الإثنين -->
+<div class="day-section">
+  
+  <h2>يوم الإثنين</h2>
+  
+  <div id="match1" class="match-card">
+    <div class="match-info">
+      <span class="team team1">نبيل الفتحلي</span> vs <span class="team team2">الرحمة</span>
+      <span class="day-time">🕒 19:00</span>
+     
+    </div>
+  </div>
+  <div id="match2" class="match-card">
+    <div class="match-info">
+      <span class="team team3">شفافلة</span> vs <span class="team team4">قرشين</span>
+      <span class="day-time">🕒 20:15</span>
+    </div>
+  </div>
+</div>
+
+<!-- الثلاثاء -->
+<div class="day-section">
+  <h2>يوم الثلاثاء</h2>
+  <div id="match3" class="match-card">
+    <div class="match-info">
+      <span class="team team5">قصر سعد</span> vs <span class="team team6">العيايدة</span>
+      <span class="day-time">🕒 19:00</span>
+    </div>
+  </div>
+  <div id="match4" class="match-card">
+    <div class="match-info">
+      <span class="team team2">السودان</span> vs <span class="team team3">لبنة</span>
+      <span class="day-time">🕒 20:15</span>
+    </div>
+  </div>
+</div>
+
+<!-- الأربعاء -->
+<div class="day-section">
+  <h2>يوم الأربعاء</h2>
+  <div id="match5" class="match-card">
+    <div class="match-info">
+      <span class="team team4">البريقي</span> vs <span class="team team5">عين غراب</span>
+      <span class="day-time">🕒 19:00</span>
+    </div>
+  </div>
+  <div id="match6" class="match-card">
+    <div class="match-info">
+      <span class="team team1">تافلون حمة</span> vs <span class="team team6">ديار الحجاج</span>
+      <span class="day-time">🕒 20:15</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function scrollToMatch(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// Recherche par équipe
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', function() {
+  const filter = this.value.toLowerCase();
+  const matches = document.querySelectorAll('.match-card');
+  matches.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(filter) ? '' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>
